@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 from matplotlib import figure
 import pcl.pcl_visualization
 
-
 # Reading data
 inputPath = 'PATH_TO_YOUR_INPUT_BIN_FILE/filename.bin'
 outputPath = 'WHERE_YOU_WANT_TO_SAVE_YOUR_OUTPUT/filename.csv'
@@ -37,16 +36,19 @@ xyz[:, 1] = np.reshape(Y, -1)
 xyz[:, 2] = np.reshape(Z, -1)
 pc = pcl.PointCloud()
 pcd = pc.from_list(xyz)
+
 # Downsampling - Voxel filter
 voxel = pc.make_voxel_grid_filter()
 voxel.set_leaf_size(0.05, 0.05, 0.05)  # Leaf sizes are in meters
 # The bigger leaf sizes are the more samples are combined and the more dot-ish the image becomes
 voxel_filter = voxel.filter()
+
 # Downsampling - Statistical outlier filter
 outlier = pc.make_statistical_outlier_filter()
 outlier.set_mean_k(30)
 outlier.set_std_dev_mul_thresh(0.1)
 outlier_filter = outlier.filter()
+
 # Segmentation
 seg = voxel_filter.make_segmenter()
 seg.set_optimize_coefficients(True)
@@ -59,6 +61,7 @@ inliers, plane_model = seg.segment()
 print(f"Plane equation: {a:.2f}x + {b:.2f}y + {c:.2f}z + {d:.2f} = 0")
 inlier_cloud = outlier_filter.extract(inliers, negative=False)
 outlier_cloud = outlier_filter.extract(inliers, negative=True)
+
 # Clustering using KdTree and Euclidean distance
 tree = voxel_filter.make_kdtree()
 ec = voxel_filter.make_EuclideanClusterExtraction()
