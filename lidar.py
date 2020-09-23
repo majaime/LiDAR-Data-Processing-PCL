@@ -1,5 +1,5 @@
 # This code reads a .bin file, stores the data in a .csv file, and 
-# processes (filtering, segmenting, clustering, ...) LiDAR point
+# processes (filtering, segmenting, & clustering) LiDAR point
 # cloud data using "PCL" library in Python.
 
 """ Two filters for downsampling are represented. I used voxel for segmentation.
