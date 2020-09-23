@@ -1,5 +1,5 @@
 # LiDAR-Data-Processing-PCL
-This code processes (filtering, segmenting, clustering, ...) LiDAR point cloud data using "PCL" library in Python.
+This code processes (filtering, segmenting, & clustering) LiDAR point cloud data using "PCL" library in Python.
 
 It reads .bin file and processes the data in a point-cloud format.
 
